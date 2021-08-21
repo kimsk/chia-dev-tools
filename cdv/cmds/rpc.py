@@ -2,6 +2,7 @@ import click
 import aiohttp
 import asyncio
 
+import json
 from typing import Dict, Optional, List, Tuple
 from pprint import pprint
 
@@ -59,7 +60,7 @@ def rpc_state_cmd():
             node_client: FullNodeRpcClient = await get_client()
             state: Dict = await node_client.get_blockchain_state()
             state["peak"] = state["peak"].to_json_dict()
-            pprint(state)
+            print(json.dumps(state, sort_keys=True, indent=4))
         finally:
             node_client.close()
             await node_client.await_closed()
@@ -364,9 +365,9 @@ def rpc_coinrecords_cmd(values: Tuple[str], by: str, as_name_dict: bool, **kwarg
                 cr_dict = {}
                 for record in coin_record_dicts:
                     cr_dict[Coin.from_json_dict(record["coin"]).name().hex()] = record
-                pprint(cr_dict)
+                print(json.dumps(cr_dict, sort_keys=True, indent=4))
             else:
-                pprint(coin_record_dicts)
+                print(json.dumps(coin_record_dicts, sort_keys=True, indent=4))
         finally:
             node_client.close()
             await node_client.await_closed()
