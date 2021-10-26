@@ -37,7 +37,7 @@ def monkey_patch_click() -> None:
 
 
 @click.group(
-    help="\n  Dev tooling for Chia development \n",
+    help="\n  Dev tooling for Chia development (kimsk/chia-dev-tools) \n",
     context_settings=CONTEXT_SETTINGS,
 )
 @click.version_option(__version__)

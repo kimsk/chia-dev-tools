@@ -6,3 +6,4 @@
 __pycache__/
 main.sym
 .coverage
+/build
